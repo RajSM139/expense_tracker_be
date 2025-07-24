@@ -1,10 +1,9 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { FirebaseAuthGuard } from '@middleware/firebase-auth';
 import { UserContext } from '@common/user-context';
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import {
   CreateUserDto,
-  CreateUserRequestDto,
   UserProfileDto,
   CreateUserProfileDto,
 } from '@model/user.dto';
@@ -34,7 +33,8 @@ export class UserController {
   @Post('create')
   @ApiOperation({
     summary: 'Create User Profile',
-    description: 'Creates a new user profile for a Firebase-authenticated user. The client must provide a valid Firebase ID token in the Authorization header. Only extra profile data (firstName, lastName, etc.) is accepted.'
+    description:
+      'Creates a new user profile for a Firebase-authenticated user. The client must provide a valid Firebase ID token in the Authorization header. Only extra profile data (firstName, lastName, etc.) is accepted.',
   })
   @ApiResponse({
     status: customHttpStatus('USER_CREATED').statusCode,

@@ -31,7 +31,6 @@ export class UserService {
     context: DecodedIdToken,
     userProfile: CreateUserProfileDto,
   ): Promise<CreateUserDto> {
-    console.log("🚀 ~ UserService ~ createUserProfile ~ context:", context)
     const newUserProfile: CreateUserDto = {
       userId: context.user_id,
       firstName: userProfile.firstName,

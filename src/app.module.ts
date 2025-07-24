@@ -14,7 +14,12 @@ import { UserService } from './service/user.service';
     }),
   ],
   controllers: [AppController, AuthController, UserController],
-  providers: [AppService, FirestoreService, UserService, ...FirebaseAdminProviders],
+  providers: [
+    AppService,
+    FirestoreService,
+    UserService,
+    ...FirebaseAdminProviders,
+  ],
   exports: [FirestoreService],
 })
 export class AppModule {}
