@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { AuthController, UserController } from './controller';
 import { FirestoreService } from './service/firestore.service';
+import { FirebaseAdminProviders } from './firebase-admin-init';
+import { UserService } from './service/user.service';
 
 @Module({
   imports: [
@@ -12,7 +14,7 @@ import { FirestoreService } from './service/firestore.service';
     }),
   ],
   controllers: [AppController, AuthController, UserController],
-  providers: [AppService, FirestoreService],
+  providers: [AppService, FirestoreService, UserService, ...FirebaseAdminProviders],
   exports: [FirestoreService],
 })
 export class AppModule {}
