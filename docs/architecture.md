@@ -18,9 +18,8 @@ Track Expense Backend is built with NestJS and provides RESTful APIs for user au
 
 ```mermaid
 graph TD
-  A[Client (Web/App)] -- REST API --> B[NestJS Backend]
-  B -- Auth --> C[Firebase Auth]
-  B -- Data --> D[Firestore]
+  A[Client] --> B[Backend]
+  B --> C[Database]
 ```
 
 ---
