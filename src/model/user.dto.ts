@@ -20,8 +20,9 @@ export class UserProfileDto {
   @ApiProperty({
     example: '+1234567890',
     description: 'The mobile number of the user',
+    required: false,
   })
-  mobile: string;
+  mobile?: string;
 
   @ApiProperty({ example: true, description: 'Email verification status' })
   emailVerified: boolean;
@@ -132,8 +133,9 @@ export class CreateUserDto {
   @ApiProperty({
     example: '+1234567890',
     description: 'The mobile number of the user',
+    required: false,
   })
-  mobile: string;
+  mobile?: string;
 
   @ApiProperty({ example: 'free', description: 'User type: free or paid' })
   userType: UserType;
@@ -144,6 +146,36 @@ export class CreateUserDto {
   @ApiProperty({ example: false, description: 'Mobile verification status' })
   mobileVerified: boolean;
 
+  @ApiProperty({
+    example: 'John',
+    description: 'The first name of the user',
+    required: false,
+  })
+  firstName?: string;
+
+  @ApiProperty({
+    example: 'Doe',
+    description: 'The last name of the user',
+    required: false,
+  })
+  lastName?: string;
+
+  @ApiProperty({
+    example: 'Male',
+    description: 'Gender of the user',
+    required: false,
+  })
+  gender?: Gender;
+
+  @ApiProperty({
+    example: 'YYYY-MM-DD',
+    description: 'Date of birth of the user',
+    required: false,
+  })
+  dob?: string;
+}
+
+export class CreateUserProfileDto {
   @ApiProperty({
     example: 'John',
     description: 'The first name of the user',
@@ -189,8 +221,9 @@ export class UserDto {
   @ApiProperty({
     example: '+1234567890',
     description: 'The mobile number of the user',
+    required: false,
   })
-  mobile: string;
+  mobile?: string;
 
   @ApiProperty({
     example: 'hashed_password',

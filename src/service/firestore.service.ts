@@ -1,12 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { Firestore, Timestamp, WriteResult } from '@google-cloud/firestore';
+import { Injectable, Inject } from '@nestjs/common';
+import { Timestamp, WriteResult } from '@google-cloud/firestore';
+import { FIREBASE_ADMIN } from '../firebase-admin-init';
+import type * as admin from 'firebase-admin';
 
 @Injectable()
 export class FirestoreService {
-  private readonly db: Firestore;
+  private readonly db: FirebaseFirestore.Firestore;
 
-  constructor() {
-    this.db = new Firestore();
+  constructor(@Inject(FIREBASE_ADMIN) private readonly admin: admin.app.App) {
+    this.db = this.admin.firestore();
+    this.db.settings({ ignoreUndefinedProperties: true });
   }
 
   getCollection(collectionName: string) {
@@ -66,9 +69,15 @@ export class FirestoreService {
 
   // Retrieves a document by its ID
   // Returns the document data or null if it does not exist
-  async getDocument(collection: string, docId: string) {
-    const doc = await this.db.collection(collection).doc(docId).get();
-    return doc.exists ? doc.data() : null;
+  async getDocument(collection: string, userId: string) {
+    const snapshot = await this.db
+      .collection(collection)
+      .where('userId', '==', userId)
+      .limit(1)
+      .get();
+    if (snapshot.empty) return null;
+    const doc = snapshot.docs[0];
+    return { id: doc.id, ...doc.data() };
   }
 
   // Deletes a document by its ID

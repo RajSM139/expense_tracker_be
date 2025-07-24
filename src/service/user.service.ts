@@ -1,9 +1,9 @@
 import {
   CreateUserDto,
-  CreateUserRequestDto,
   UserProfileDto,
+  CreateUserProfileDto,
 } from '@model/user.dto';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { DecodedIdToken } from 'firebase-admin/auth';
 import { FirestoreService } from './firestore.service';
 import { customHttpStatus } from '@utils/status-codes.util';
@@ -13,10 +13,7 @@ export class UserService {
   // This service can be used to manage user-related operations
   // For example, fetching user profiles, updating user information, etc.
 
-  private readonly firestoreService: FirestoreService;
-  constructor() {
-    this.firestoreService = new FirestoreService();
-  }
+  constructor(private readonly firestoreService: FirestoreService) {}
   private readonly collectionName = 'users';
 
   getUserProfile(context: DecodedIdToken): UserProfileDto {
@@ -24,17 +21,16 @@ export class UserService {
       userId: context.user_id,
       email: context.email,
       emailVerified: context.email_verified,
-      mobile: context.phone_number,
-      mobileVerified: context.phone_number_verified,
+      mobile: context.phone_number || undefined,
+      mobileVerified: context.phone_number_verified || false,
       userType: context.user_type,
     };
   }
 
   async createUserProfile(
     context: DecodedIdToken,
-    userProfile: CreateUserRequestDto,
+    userProfile: CreateUserProfileDto,
   ): Promise<CreateUserDto> {
-    console.log('🚀 ~ UserService ~ createUserProfile ~ context:', context);
     const newUserProfile: CreateUserDto = {
       userId: context.user_id,
       firstName: userProfile.firstName,
@@ -42,9 +38,9 @@ export class UserService {
       gender: userProfile?.gender || 'Prefer not to say',
       dob: userProfile?.dob || '',
       email: context.email,
-      mobile: context.phone_number,
+      mobile: context.phone_number || undefined,
       emailVerified: context.email_verified,
-      mobileVerified: context.phone_number_verified,
+      mobileVerified: context.phone_number_verified || false,
       userType: context.user_type,
     };
     const existingProfile = await this.firestoreService.getDocument(
@@ -54,7 +50,7 @@ export class UserService {
     // If the user profile already exists, update it
     if (existingProfile) {
       const { message, statusCode } = customHttpStatus('USER_ALREADY_EXISTS');
-      throw new Error(`${statusCode}: ${message}`);
+      throw new HttpException({ message, statusCode }, HttpStatus.CONFLICT);
     }
     // Set the user profile in Firestore
     const response = await this.firestoreService.createDocument(
