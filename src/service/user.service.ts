@@ -24,6 +24,9 @@ export class UserService {
       userId: context.user_id,
       email: context.email,
       emailVerified: context.email_verified,
+      mobile: context.phone_number,
+      mobileVerified: context.phone_number_verified,
+      userType: context.user_type,
     };
   }
 
@@ -38,6 +41,11 @@ export class UserService {
       lastName: userProfile.lastName,
       gender: userProfile?.gender || 'Prefer not to say',
       dob: userProfile?.dob || '',
+      email: context.email,
+      mobile: context.phone_number,
+      emailVerified: context.email_verified,
+      mobileVerified: context.phone_number_verified,
+      userType: context.user_type,
     };
     const existingProfile = await this.firestoreService.getDocument(
       this.collectionName,
