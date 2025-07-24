@@ -19,7 +19,6 @@ export class FirebaseAuthGuard implements CanActivate {
     }
 
     const idToken = authHeader.split('Bearer ')[1];
-    console.log('🚀 ~ FirebaseAuthGuard ~ canActivate ~ idToken:', idToken);
 
     try {
       const decodedToken = await admin.auth().verifyIdToken(idToken);
