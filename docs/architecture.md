@@ -18,10 +18,44 @@ Track Expense Backend is built with NestJS and provides RESTful APIs for user au
 
 ```mermaid
 graph TD
-  A[Client (Web/App)] -- REST API --> B[NestJS Backend]
-  B -- Auth --> C[Firebase Auth]
-  B -- Data --> D[Firestore]
+  A[Client] --> B[Backend]
+  B --> C[Database]
 ```
+
+---
+
+## Registration & Login Flow (with Firebase Auth)
+
+```mermaid
+sequenceDiagram
+  participant User
+  participant Frontend
+  participant FirebaseAuth
+  participant Backend
+  participant Firestore
+
+  User->>Frontend: Register (email, mobile, password, profile)
+  Frontend->>FirebaseAuth: Create user
+  FirebaseAuth-->>Frontend: Success (UID)
+  Frontend->>Backend: Send profile info + UID
+  Backend->>Firestore: Create users/{uid} doc
+  Backend-->>Frontend: Success
+
+  User->>Frontend: Login (email/mobile + password/OTP)
+  Frontend->>FirebaseAuth: Authenticate
+  FirebaseAuth-->>Frontend: ID token
+  Frontend->>Backend: API request + ID token
+  Backend->>FirebaseAuth: Verify ID token
+  FirebaseAuth-->>Backend: UID
+  Backend->>Firestore: Fetch users/{uid}
+  Backend-->>Frontend: User data
+```
+
+---
+
+## Firebase Auth & Firestore Roles
+- **Firebase Auth:** Handles user identity, password, email/mobile verification, and social logins.
+- **Firestore:** Stores user profile and app-specific data, keyed by Firebase UID.
 
 ---
 
