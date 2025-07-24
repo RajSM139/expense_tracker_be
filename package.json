@@ -1,8 +1,8 @@
 {
-  "name": "nest-typescript-starter",
+  "name": "track-expense-backend",
   "private": true,
   "version": "1.0.0",
-  "description": "Nest TypeScript starter repository",
+  "description": "Backend APIs and services for Track Expense, an open source expense tracker app.",
   "license": "MIT",
   "scripts": {
     "build": "nest build",
@@ -24,6 +24,7 @@
     "node": ">=20.0.0"
   },
   "dependencies": {
+    "@google-cloud/firestore": "^7.11.1",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.1",
@@ -88,5 +89,14 @@
       "@nestjs/core",
       "@swc/core"
     ]
-  }
+  },
+  "author": "Rajesh Mishra <RajSM139>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RajSM139/expense_tracker_be.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RajSM139/expense_tracker_be/issues"
+  },
+  "homepage": "https://github.com/RajSM139/expense_tracker_be#readme"
 }

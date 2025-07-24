@@ -2,7 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
-import { AuthController } from './controller';
+import { AuthController, UserController } from './controller';
+import { FirestoreService } from './service/firestore.service';
 
 @Module({
   imports: [
@@ -10,7 +11,8 @@ import { AuthController } from './controller';
       isGlobal: true,
     }),
   ],
-  controllers: [AppController, AuthController],
-  providers: [AppService],
+  controllers: [AppController, AuthController, UserController],
+  providers: [AppService, FirestoreService],
+  exports: [FirestoreService],
 })
 export class AppModule {}
