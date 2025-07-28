@@ -26,7 +26,7 @@ export class UserController {
     description: 'User profile retrieved successfully.',
     type: UserProfileDto,
   })
-  getProfile(): UserProfileDto {
+  async getProfile(): Promise<UserProfileDto> {
     return this.userService.getUserProfile(UserContext.getUser());
   }
 

@@ -5,5 +5,15 @@
   "testRegex": "\\.e2e-spec\\.ts$",
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "^@middleware/(.*)$": "<rootDir>/../src/middleware/$1",
+    "^@common/(.*)$": "<rootDir>/../src/common/$1",
+    "^@model/(.*)$": "<rootDir>/../src/model/$1",
+    "^@service/(.*)$": "<rootDir>/../src/service/$1",
+    "^@controller/(.*)$": "<rootDir>/../src/controller/$1",
+    "^@utils/(.*)$": "<rootDir>/../src/utils/$1",
+    "^@entities/(.*)$": "<rootDir>/../src/entities/$1",
+    "^@config/(.*)$": "<rootDir>/../src/config/$1"
   }
 }

@@ -20,7 +20,9 @@
       "@model/*": ["model/*"],
       "@service/*": ["service/*"],
       "@controller/*": ["controller/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@entities/*": ["entities/*"],
+      "@config/*": ["config/*"]
     }
   }
 }

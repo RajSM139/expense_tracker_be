@@ -32,6 +32,11 @@ export const HttpStatusMessages = {
     statusCode: 200001,
     message: 'User created successfully.',
   },
+  // 404 Not Found
+  USER_NOT_FOUND: {
+    statusCode: 404001,
+    message: 'User not found.',
+  },
   // 409 Conflict
   USER_ALREADY_EXISTS: {
     statusCode: 409001,
