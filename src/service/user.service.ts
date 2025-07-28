@@ -38,7 +38,7 @@ export class UserService {
       gender: userProfile?.gender || 'Prefer not to say',
       dob: userProfile?.dob || '',
       email: context.email,
-      mobile: context.phone_number,
+      mobile: context.phone_number || undefined,
       emailVerified: context.email_verified,
       mobileVerified: (context.phone_number_verified as boolean) || false,
       userType: context.user_type as 'free' | 'paid',
