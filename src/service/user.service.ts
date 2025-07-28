@@ -18,12 +18,12 @@ export class UserService {
 
   getUserProfile(context: DecodedIdToken): UserProfileDto {
     return {
-      userId: context.user_id,
+      userId: context.user_id as string,
       email: context.email,
       emailVerified: context.email_verified,
-      mobile: context.phone_number || undefined,
-      mobileVerified: context.phone_number_verified || false,
-      userType: context.user_type,
+      mobile: context.phone_number,
+      mobileVerified: (context.phone_number_verified as boolean) || false,
+      userType: context.user_type as 'free' | 'paid',
     };
   }
 
@@ -32,7 +32,7 @@ export class UserService {
     userProfile: CreateUserProfileDto,
   ): Promise<CreateUserDto> {
     const newUserProfile: CreateUserDto = {
-      userId: context.user_id,
+      userId: context.user_id as string,
       firstName: userProfile.firstName,
       lastName: userProfile.lastName,
       gender: userProfile?.gender || 'Prefer not to say',
@@ -40,12 +40,12 @@ export class UserService {
       email: context.email,
       mobile: context.phone_number || undefined,
       emailVerified: context.email_verified,
-      mobileVerified: context.phone_number_verified || false,
-      userType: context.user_type,
+      mobileVerified: (context.phone_number_verified as boolean) || false,
+      userType: context.user_type as 'free' | 'paid',
     };
     const existingProfile = await this.firestoreService.getDocument(
       this.collectionName,
-      context.user_id,
+      context.user_id as string,
     );
     // If the user profile already exists, update it
     if (existingProfile) {
