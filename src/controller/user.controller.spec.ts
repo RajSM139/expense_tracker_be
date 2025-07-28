@@ -44,20 +44,22 @@ describe('UserController', () => {
   });
 
   describe('getProfile', () => {
-    it('should return the user profile', () => {
+    it('should return the user profile', async () => {
       const mockUser = {
         user_id: '123',
         email: 'test@example.com',
       } as unknown as DecodedIdToken;
       const mockProfile = {
-        id: '123',
-        firstName: 'John',
-        lastName: 'Doe',
+        userId: '123',
         email: 'test@example.com',
+        emailVerified: true,
+        mobile: null,
+        mobileVerified: false,
+        userType: 'free',
       } as unknown as UserProfileDto;
       (UserContext.getUser as jest.Mock).mockReturnValue(mockUser);
-      userService.getUserProfile.mockReturnValue(mockProfile);
-      const result = controller.getProfile();
+      userService.getUserProfile.mockResolvedValue(mockProfile);
+      const result = await controller.getProfile();
       expect(result).toBe(mockProfile);
       expect(userService.getUserProfile).toHaveBeenCalledWith(mockUser);
     });

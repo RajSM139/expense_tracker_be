@@ -5,7 +5,8 @@
   <p>
     <img src="https://img.shields.io/badge/NestJS-Framework-red?logo=nestjs" alt="NestJS" />
     <img src="https://img.shields.io/badge/Firebase-Auth-yellow?logo=firebase" alt="Firebase" />
-    <img src="https://img.shields.io/badge/Firestore-Database-blue?logo=google-cloud" alt="Firestore" />
+    <img src="https://img.shields.io/badge/PostgreSQL-Database-blue?logo=postgresql" alt="PostgreSQL" />
+    <img src="https://img.shields.io/badge/TypeORM-ORM-green?logo=typeorm" alt="TypeORM" />
     <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License" />
     <!-- Add your real CI badge here -->
     <img src="https://img.shields.io/badge/build-passing-brightgreen" alt="Build Status" />
@@ -25,7 +26,8 @@
 
 - 🔐 **Firebase Authentication**
 - 👤 **User Profile Management**
-- ☁️ **Firestore Integration**
+- 🗄️ **PostgreSQL Database with TypeORM**
+- 📊 **Expense Tracking Ready**
 - 📖 **Swagger API Documentation**
 - 🛡️ Modern NestJS architecture
 
@@ -33,6 +35,22 @@
 
 ## ⚡ Quickstart
 
+### Prerequisites
+- Node.js >= 20.0.0
+- PostgreSQL >= 12.0
+- Firebase project setup
+
+### Setup Database
+```bash
+# Run the database setup script
+./scripts/setup-database.sh
+
+# Or manually create database and run migrations
+# 1. Create PostgreSQL database named 'track_expense'
+# 2. Run: psql -d track_expense -f src/database/migrations/001-initial-schema.sql
+```
+
+### Install & Run
 ```bash
 git clone <repo-url>
 cd expense_tracker_be
@@ -40,7 +58,7 @@ npm install
 npm run start:dev
 ```
 
-> ℹ️ **Tip:** Copy your Firebase service account and environment variables before running.
+> ℹ️ **Tip:** Copy your Firebase service account and set up environment variables before running.
 
 ---
 
@@ -54,6 +72,7 @@ npm run start:dev
 ## 📄 Documentation
 
 - [🛠️ Architecture](./docs/architecture.md)
+- [🗄️ Database Setup](./docs/database-setup.md)
 - [⚙️ Setup Guide](./docs/setup.md)
 - [🚀 Deployment](./docs/deployment.md)
 - [❓ FAQ](./docs/faq.md)
