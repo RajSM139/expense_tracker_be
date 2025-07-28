@@ -45,10 +45,8 @@ export class UserController {
   async createUserProfile(
     @Body() createUserDto: CreateUserProfileDto,
   ): Promise<CreateUserDto> {
-    const context = UserContext.getUser();
-    // Only allow extra profile fields to be set by user
     const userProfile = await this.userService.createUserProfile(
-      context,
+      UserContext.getUser(),
       createUserDto,
     );
     return userProfile;

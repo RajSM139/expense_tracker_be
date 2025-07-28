@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 export class ResponseInterceptor<T> implements NestInterceptor<T, unknown> {
   intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     return next.handle().pipe(
-      map((data) => ({
+      map((data: unknown) => ({
         success: true,
         data,
         timestamp: new Date().toISOString(),
